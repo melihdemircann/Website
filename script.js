@@ -1405,27 +1405,20 @@ document.addEventListener("DOMContentLoaded", () => {
 // Rezervasyon Formu İşlevselliği
 document.addEventListener('DOMContentLoaded', function() {
     const reservationForm = document.getElementById('reservationForm');
-    const checkInInput = document.getElementById('check-in');
-    const checkOutInput = document.getElementById('check-out');
-    const checkAvailabilityBtn = document.getElementById('check-availability');
-    const availabilityResult = document.getElementById('availability-result');
-    const roomOptions = document.querySelectorAll('input[name="room-type"]');
-    const addonOptions = document.querySelectorAll('input[name="addons"]');
-    const roomTotalElement = document.getElementById('room-total');
-    const addonsTotalElement = document.getElementById('addons-total');
-    const grandTotalElement = document.getElementById('grand-total');
+    const checkInInput = document.getElementById('checkIn');
+    const checkOutInput = document.getElementById('checkOut');
+    const roomTypeSelect = document.getElementById('roomType');
+    const adultsInput = document.getElementById('adults');
+    const childrenInput = document.getElementById('children');
+    const roomPriceElement = document.getElementById('roomPrice');
+    const totalNightsElement = document.getElementById('totalNights');
+    const grandTotalElement = document.getElementById('grandTotal');
     
-    // Fiyat bilgileri
+    // Oda fiyatları
     const roomPrices = {
-        'standard': 1200,
+        'standart': 1200,
         'deluxe': 1800,
         'suite': 2500
-    };
-    
-    const addonPrices = {
-        'spa': 350,
-        'breakfast': 150,
-        'airport': 250
     };
     
     // Bugünün tarihini ayarla
@@ -1451,85 +1444,54 @@ document.addEventListener('DOMContentLoaded', function() {
         if (new Date(checkOutInput.value) < minCheckOutDate) {
             checkOutInput.value = minCheckOutDate.toISOString().split('T')[0];
         }
+        
+        updatePriceSummary();
     });
     
-    // Müsaitlik kontrolü
-    checkAvailabilityBtn.addEventListener('click', function() {
-        const checkIn = checkInInput.value;
-        const checkOut = checkOutInput.value;
-        
-        if (!checkIn || !checkOut) {
-            showAvailabilityResult('Lütfen giriş ve çıkış tarihlerini seçiniz', false);
-            return;
-        }
-        
-        // Yükleme göstergesi
-        availabilityResult.innerHTML = '<div class="loading">Kontrol ediliyor...</div>';
-        availabilityResult.style.display = 'block';
-        
-        // Simüle edilmiş API isteği
-        setTimeout(() => {
-            // Gerçek uygulamada burada bir API isteği yapılır
-            const isAvailable = Math.random() > 0.3; // %70 müsaitlik simülasyonu
+    // Çıkış tarihi değiştiğinde fiyatı güncelle
+    checkOutInput.addEventListener('change', updatePriceSummary);
+    
+    // Oda tipi değiştiğinde fiyatı güncelle
+    roomTypeSelect.addEventListener('change', updatePriceSummary);
+    
+    // Misafir sayısı butonları
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            const input = document.getElementById(target);
+            let value = parseInt(input.value);
             
-            if (isAvailable) {
-                showAvailabilityResult('Seçtiğiniz tarihlerde müsaitlik bulunmaktadır.', true);
+            if (this.classList.contains('minus')) {
+                if (value > (target === 'adults' ? 1 : 0)) {
+                    input.value = value - 1;
+                }
             } else {
-                showAvailabilityResult('Üzgünüz, seçtiğiniz tarihlerde müsaitlik bulunmamaktadır.', false);
+                if (value < (target === 'adults' ? 4 : 2)) {
+                    input.value = value + 1;
+                }
             }
-        }, 1500);
-    });
-    
-    // Oda ve ek hizmet seçimlerini izle
-    roomOptions.forEach(option => {
-        option.addEventListener('change', updateTotals);
-    });
-    
-    addonOptions.forEach(option => {
-        option.addEventListener('change', updateTotals);
-    });
-    
-    // Toplamları güncelle
-    function updateTotals() {
-        // Seçili odayı bul
-        let selectedRoom = '';
-        roomOptions.forEach(option => {
-            if (option.checked) {
-                selectedRoom = option.value;
-            }
+            
+            updatePriceSummary();
         });
-        
-        // Oda toplamını hesapla
-        const roomTotal = roomPrices[selectedRoom] || 0;
-        
-        // Ek hizmet toplamını hesapla
-        let addonsTotal = 0;
-        addonOptions.forEach(option => {
-            if (option.checked) {
-                addonsTotal += addonPrices[option.value] || 0;
-            }
-        });
-        
-        // Gece sayısını hesapla
+    });
+    
+    // Fiyat özetini güncelle
+    function updatePriceSummary() {
         const checkIn = new Date(checkInInput.value);
         const checkOut = new Date(checkOutInput.value);
         const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24)) || 1;
         
-        // Toplamları güncelle
-        const roomTotalForStay = roomTotal * nights;
-        const grandTotal = roomTotalForStay + addonsTotal;
+        const roomType = roomTypeSelect.value;
+        const roomPrice = roomPrices[roomType] || 0;
+        const totalPrice = roomPrice * nights;
         
-        roomTotalElement.textContent = `₺${roomTotalForStay.toLocaleString()}`;
-        addonsTotalElement.textContent = `₺${addonsTotal.toLocaleString()}`;
-        grandTotalElement.textContent = `₺${grandTotal.toLocaleString()}`;
+        roomPriceElement.textContent = `₺${roomPrice.toLocaleString('tr-TR')}`;
+        totalNightsElement.textContent = `${nights} gece`;
+        grandTotalElement.textContent = `₺${totalPrice.toLocaleString('tr-TR')}`;
     }
     
-    // Müsaitlik sonucunu göster
-    function showAvailabilityResult(message, isAvailable) {
-        availabilityResult.textContent = message;
-        availabilityResult.className = isAvailable ? 'available' : 'unavailable';
-        availabilityResult.style.display = 'block';
-    }
+    // İlk yüklemede fiyatı güncelle
+    updatePriceSummary();
     
     // Form gönderimi
     reservationForm.addEventListener('submit', function(e) {
@@ -1542,81 +1504,116 @@ document.addEventListener('DOMContentLoaded', function() {
             data[key] = value;
         });
         
+        // Gece sayısını hesapla
+        const checkIn = new Date(data.checkIn);
+        const checkOut = new Date(data.checkOut);
+        const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24)) || 1;
+        
+        // Toplam fiyatı hesapla
+        const roomPrice = roomPrices[data.roomType] || 0;
+        const totalPrice = roomPrice * nights;
+        
         // Rezervasyon özetini göster
-        showReservationSummary(data);
+        showReservationSummary(data, nights, totalPrice);
     });
     
     // Rezervasyon özeti modalı
-    function showReservationSummary(data) {
-        // Modal oluştur
+    function showReservationSummary(data, nights, totalPrice) {
         const modal = document.createElement('div');
-        modal.className = 'reservation-modal';
+        modal.className = 'reservation-summary-modal';
         modal.innerHTML = `
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Rezervasyon Özeti</h3>
-                    <button class="close-modal">&times;</button>
+                <span class="close-modal">&times;</span>
+                <h2>Rezervasyon Özeti</h2>
+                
+                <div class="summary-section">
+                    <h3>Kişi Bilgileri</h3>
+                    <p><strong>Ad Soyad:</strong> ${data.fullName}</p>
+                    <p><strong>E-posta:</strong> ${data.email}</p>
+                    <p><strong>Telefon:</strong> ${data.phone}</p>
                 </div>
-                <div class="modal-body">
-                    <div class="summary-section">
-                        <h4>Kişi Bilgileri</h4>
-                        <p><strong>Ad Soyad:</strong> ${data['full-name']}</p>
-                        <p><strong>E-posta:</strong> ${data.email}</p>
-                        <p><strong>Telefon:</strong> ${data.phone}</p>
-                    </div>
-                    
-                    <div class="summary-section">
-                        <h4>Konaklama Bilgileri</h4>
-                        <p><strong>Giriş:</strong> ${formatDate(data['check-in'])}</p>
-                        <p><strong>Çıkış:</strong> ${formatDate(data['check-out'])}</p>
-                        <p><strong>Oda Tipi:</strong> ${getRoomName(data['room-type'])}</p>
-                    </div>
-                    
-                    <div class="summary-section">
-                        <h4>Toplam Ücret</h4>
-                        <p class="total-price">${grandTotalElement.textContent}</p>
-                    </div>
+                
+                <div class="summary-section">
+                    <h3>Konaklama Bilgileri</h3>
+                    <p><strong>Giriş:</strong> ${formatDate(data.checkIn)}</p>
+                    <p><strong>Çıkış:</strong> ${formatDate(data.checkOut)}</p>
+                    <p><strong>Oda Tipi:</strong> ${getRoomName(data.roomType)}</p>
+                    <p><strong>Gece Sayısı:</strong> ${nights} gece</p>
+                    <p><strong>Misafirler:</strong> ${data.adults} Yetişkin, ${data.children} Çocuk</p>
+                    ${data.specialRequests ? `<p><strong>Özel İstekler:</strong> ${data.specialRequests}</p>` : ''}
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" id="edit-reservation">Düzenle</button>
-                    <button class="btn btn-primary" id="confirm-reservation">Onayla</button>
+                
+                <div class="summary-section">
+                    <h3>Toplam Ücret</h3>
+                    <p class="total-price">₺${totalPrice.toLocaleString('tr-TR')}</p>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-outline" id="editReservation">Düzenle</button>
+                    <button class="btn btn-primary" id="confirmReservation">Rezervasyonu Onayla</button>
                 </div>
             </div>
         `;
         
         document.body.appendChild(modal);
-        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
+        
+        // Animasyon
+        gsap.fromTo(modal.querySelector('.modal-content'), 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.3 }
+        );
         
         // Kapatma butonu
-        modal.querySelector('.close-modal').addEventListener('click', () => {
-            document.body.removeChild(modal);
-            document.body.classList.remove('modal-open');
-        });
+        modal.querySelector('.close-modal').addEventListener('click', closeModal);
         
         // Düzenle butonu
-        modal.querySelector('#edit-reservation').addEventListener('click', () => {
-            document.body.removeChild(modal);
-            document.body.classList.remove('modal-open');
-        });
+        modal.querySelector('#editReservation').addEventListener('click', closeModal);
         
         // Onayla butonu
-        modal.querySelector('#confirm-reservation').addEventListener('click', () => {
-            // Gerçek uygulamada burada API isteği yapılır
-            modal.querySelector('.modal-body').innerHTML = `
+        modal.querySelector('#confirmReservation').addEventListener('click', function() {
+            processReservation(data, totalPrice, modal);
+        });
+        
+        function closeModal() {
+            gsap.to(modal.querySelector('.modal-content'), {
+                y: 50,
+                opacity: 0,
+                duration: 0.2,
+                onComplete: () => {
+                    document.body.removeChild(modal);
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+    }
+    
+    // Rezervasyon işleme
+    function processReservation(data, totalPrice, modal) {
+        const content = modal.querySelector('.modal-content');
+        
+        // Yükleme göstergesi
+        content.innerHTML = `
+            <div class="processing">
+                <div class="spinner"></div>
+                <p>Rezervasyonunuz işleniyor...</p>
+            </div>
+        `;
+        
+        // Simüle edilmiş API isteği
+        setTimeout(() => {
+            // Başarılı yanıt simülasyonu
+            content.innerHTML = `
                 <div class="success-message">
                     <svg class="checkmark" viewBox="0 0 52 52">
                         <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
                         <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                     </svg>
-                    <h4>Rezervasyonunuz Tamamlandı!</h4>
+                    <h3>Rezervasyonunuz Tamamlandı!</h3>
                     <p>Rezervasyon numaranız: <strong>${Math.floor(100000 + Math.random() * 900000)}</strong></p>
                     <p>Detaylar e-posta adresinize gönderilmiştir.</p>
                     <button class="btn btn-primary" id="closeSuccess">Tamam</button>
                 </div>
-            `;
-            
-            modal.querySelector('.modal-footer').innerHTML = `
-                <button class="btn btn-primary" id="close-modal">Tamam</button>
             `;
             
             // Animasyon
@@ -1625,26 +1622,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // Kapat butonu
             document.getElementById('closeSuccess').addEventListener('click', () => {
                 document.body.removeChild(modal);
-                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
                 reservationForm.reset();
-                updateTotals();
+                
+                // Bugünün tarihiyle yeniden doldur
+                checkInInput.value = today;
+                const tmr = new Date();
+                tmr.setDate(tmr.getDate() + 1);
+                checkOutInput.value = tmr.toISOString().split('T')[0];
+                
+                updatePriceSummary();
             });
-        });
+        }, 2000);
     }
     
-    function getRoomName(roomType) {
-        const names = {
-            'standard': 'Standart Oda',
-            'deluxe': 'Deluxe Oda',
-            'suite': 'Suite'
-        };
-        return names[roomType] || roomType;
-    }
-    
+    // Checkmark animasyonu
     function animateCheckmark() {
         const checkmark = document.querySelector('.checkmark');
         const circle = document.querySelector('.checkmark-circle');
         const check = document.querySelector('.checkmark-check');
+        
+        if (!checkmark || !circle || !check) return;
         
         // Animasyon için GSAP kullanımı
         gsap.set([circle, check], { strokeDashoffset: 0 });
@@ -1660,9 +1658,20 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     }
     
+    // Tarih formatlama
     function formatDate(dateString) {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
         return new Date(dateString).toLocaleDateString('tr-TR', options);
+    }
+    
+    // Oda adını getirme
+    function getRoomName(roomType) {
+        const names = {
+            'standart': 'Standart Oda',
+            'deluxe': 'Deluxe Oda',
+            'suite': 'Suite'
+        };
+        return names[roomType] || roomType;
     }
 });
 
@@ -2187,11 +2196,18 @@ function enhanceReservationForm() {
             animateCheckmark();
             
             // Kapat butonu
-            modal.querySelector('#closeSuccess').addEventListener('click', () => {
+            document.getElementById('closeSuccess').addEventListener('click', () => {
                 document.body.removeChild(modal);
-                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
                 reservationForm.reset();
-                updateTotals();
+                
+                // Bugünün tarihiyle yeniden doldur
+                checkInInput.value = today;
+                const tmr = new Date();
+                tmr.setDate(tmr.getDate() + 1);
+                checkOutInput.value = tmr.toISOString().split('T')[0];
+                
+                updatePriceSummary();
             });
         }, 2000);
     }

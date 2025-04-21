@@ -178,6 +178,75 @@
                 flex: 1 1 100%;
             }
         }
+/* Yan yana yerleştirme için kapsayıcı */
+.guest-group-wrapper {
+    display: flex;
+    gap: 1rem; /* Yetişkin ve Çocuk arasında boşluk */
+    flex-wrap: wrap; /* Eğer ekran küçükse alt alta geçsin */
+}
+.guest-input{
+    margin-top: 55px;
+}
+/* Her bir guest-group'un genişliğini kontrol etme */
+.guest-group {
+    flex: 1; /* Her biri eşit genişlikte olacak */
+    min-width: 350px; /* Minimum genişlik */
+
+}
+
+/* Quantity selector butonlarının görünürlüğünü ve stilini düzenleme */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    
+    background-color: #f5f5f5;
+    border: none;
+    padding:2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.quantity-btn.minus {
+    border-right: 1px solid #ddd;
+}
+
+.quantity-btn.plus {
+    border-left: 1px solid #ddd;
+}
+
+.quantity-selector input {
+    border: none;
+    text-align: center;
+    width: 50px;
+    height: 30px;
+    font-size: 1rem;
+    background-color: transparent;
+}
+
+/* Responsive tasarım için */
+@media (max-width: 768px) {
+    .guest-group-wrapper {
+        flex-direction: column;
+    }
+}
+
     </style>
 
     <link rel="stylesheet" href="./styles.css">
@@ -564,6 +633,15 @@
                     <span class="title-decorator"></span>
                 </h2>
 
+                <!-- Galeri Filtreleme Butonları -->
+                <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="odalar">Odalar</button>
+                    <button class="filter-btn" data-filter="restoran">Restoran</button>
+                    <button class="filter-btn" data-filter="spa">Spa</button>
+                    <button class="filter-btn" data-filter="havuz">Havuz</button>
+                </div>
+                
                 <div class="gallery-grid" data-aos="fade-up" data-aos-delay="150">
                     <!-- Galeri Öğeleri -->
                     <div class="gallery-item odalar" data-category="odalar">
@@ -672,139 +750,185 @@
             </div>
         </section>
 
-        <!-- Reservation Section -->
+        <!-- Rezervasyon Bölümü -->
         <section class="reservation" id="rezervasyon">
-            <div class="reservation-container">
-                <div class="reservation-content" data-aos="fade-right">
-                    <h2 class="section-title">
-                        <span class="title-decorator"></span>
-                        Rezervasyon Yap
-                        <span class="title-decorator"></span>
-                    </h2>
-                    <p class="reservation-description">
-                        Unutulmaz bir konaklama deneyimi için hemen rezervasyon yapın. En iyi fiyat garantisi ve özel indirimler 
-                        sadece web sitemizde geçerlidir.
-                    </p>
-                    
-                    <div class="reservation-benefits">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <i class="fas fa-check-circle"></i>
+            <div class="container">
+                <div class="reservation-wrapper">
+                    <!-- Rezervasyon Bilgileri -->
+                    <div class="reservation-info">
+                        <h2 class="section-title">
+                            <span class="title-decorator"></span>
+                            Rezervasyon Yap
+                            <span class="title-decorator"></span>
+                        </h2>
+                        
+                        <div class="reservation-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <p>Kolay ve hızlı rezervasyon</p>
                             </div>
-                            <p>Ücretsiz iptal (48 saat öncesine kadar)</p>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <p>Güvenli ödeme sistemi</p>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <p>7/24 müşteri desteği</p>
+                            </div>
                         </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <p>En iyi fiyat garantisi</p>
+                        
+                        <div class="benefits-list">
+                            <h3>Rezervasyon Avantajları</h3>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Ücretsiz iptal (48 saat öncesine kadar)</li>
+                                <li><i class="fas fa-check-circle"></i> En iyi fiyat garantisi</li>
+                                <li><i class="fas fa-check-circle"></i> Özel web indirimleri</li>
+                                <li><i class="fas fa-check-circle"></i> Hızlı onay ve teyit</li>
+                            </ul>
                         </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <p>Özel web indirimleri</p>
+                        
+                        <div class="contact-info">
+                            <h3>Yardıma mı ihtiyacınız var?</h3>
+                            <a href="tel:+905396390767" class="contact-link">
+                                <i class="fas fa-phone-alt"></i> +90 (539) 639 07 67
+                            </a>
+                            <a href="mailto:info@marsiasotel.com" class="contact-link">
+                                <i class="fas fa-envelope"></i> info@marsiasotel.com
+                            </a>
                         </div>
                     </div>
                     
-                    <div class="reservation-contact">
-                        <p>Yardıma mı ihtiyacınız var?</p>
-                        <a href="tel:+905396390767" class="contact-link">
-                            <i class="fas fa-phone-alt"></i> +90 (539) 639 07 67
-                        </a>
-                        <a href="mailto:info@marsiasotel.com" class="contact-link">
-                            <i class="fas fa-envelope"></i> info@marsiasotel.com
-                        </a>
+                    <!-- Rezervasyon Formu -->
+                    <div class="reservation-form-container">
+                        <form id="reservationForm" class="reservation-form">
+                            <div class="form-header">
+                                <h3>Rezervasyon Formu</h3>
+                                <p>Konaklama bilgilerinizi girin</p>
+                            </div>
+                            
+                            <!-- Tarih Seçimi -->
+                            <div class="form-group date-group">
+                                <div class="date-input">
+
+                                    <input type="date" id="checkIn" name="checkIn" required>
+                                </div>
+                                
+                                <div class="date-input">
+
+                                    <input type="date" id="checkOut" name="checkOut" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Oda Tipi Seçimi -->
+                            <div class="form-group">
+
+                                <select id="roomType" name="roomType" required>
+                                    <option value="" disabled selected>Oda tipi seçiniz</option>
+                                    <option value="standart">Standart Oda - ₺1.200/gece</option>
+                                    <option value="deluxe">Deluxe Oda - ₺1.800/gece</option>
+                                    <option value="suite">Suite - ₺2.500/gece</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Misafir Bilgileri -->
+<!-- Misafir Bilgileri -->
+<div class="form-group guest-group-wrapper">
+    <div class="form-group guest-group">
+        <div class="guest-input">
+            <label for="adults">
+                <i class="fas fa-user"></i> Yetişkin
+            </label>
+            <div class="quantity-selector">
+                <button type="button" class="quantity-btn minus" data-target="adults">-</button>
+                <input type="number" id="adults" name="adults" min="1" max="4" value="2" readonly>
+                <button type="button" class="quantity-btn plus" data-target="adults">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group guest-group">
+        <div class="guest-input">
+            <label for="children">
+                <i class="fas fa-child"></i> Çocuk
+            </label>
+            <div class="quantity-selector">
+                <button type="button" class="quantity-btn minus" data-target="children">-</button>
+                <input type="number" id="children" name="children" min="0" max="2" value="0" readonly>
+                <button type="button" class="quantity-btn plus" data-target="children">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+                            
+                            <!-- Kişisel Bilgiler -->
+                            <div class="form-group">
+                                <label for="fullName">
+                                    <i class="fas fa-user"></i> Ad Soyad
+                                </label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">
+                                    <i class="fas fa-envelope"></i> E-posta
+                                </label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">
+                                    <i class="fas fa-phone"></i> Telefon
+                                </label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <!-- Özel İstekler -->
+                            <div class="form-group">
+                                <label for="specialRequests">
+                                    <i class="fas fa-star"></i> Özel İstekler (Opsiyonel)
+                                </label>
+                                <textarea id="specialRequests" name="specialRequests" rows="3"></textarea>
+                            </div>
+                            
+                            <!-- Fiyat Özeti -->
+                            <div class="price-summary">
+                                <div class="price-item">
+                                    <span>Oda Fiyatı</span>
+                                    <span id="roomPrice">₺0</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Toplam Gece</span>
+                                    <span id="totalNights">0 gece</span>
+                                </div>
+                                <div class="price-total">
+                                    <span>Toplam Tutar</span>
+                                    <span id="grandTotal">₺0</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Gönder Butonu -->
+                            <div class="form-submit">
+                                <button type="submit" class="submit-btn">
+                                    <span>Rezervasyon Yap</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <p class="form-note">Rezervasyonunuz onaylandıktan sonra e-posta ile bilgilendirileceksiniz.</p>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                
-                <div class="reservation-form-container" data-aos="fade-left">
-                    <form id="reservationForm" class="reservation-form">
-                        <div class="form-header">
-                            <h3>Rezervasyon Formu</h3>
-                            <p>Konaklama bilgilerinizi girin</p>
-                        </div>
-                        
-                        <div class="form-group date-group">
-                            <div class="date-input">
-                                <label for="checkIn">Giriş Tarihi</label>
-                                <input type="date" id="checkIn" name="checkIn" required>
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="date-input">
-                                <label for="checkOut">Çıkış Tarihi</label>
-                                <input type="date" id="checkOut" name="checkOut" required>
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="roomType">Oda Tipi</label>
-                            <select id="roomType" name="roomType" required>
-                                <option value="" disabled selected>Oda tipi seçiniz</option>
-                                <option value="standart">Standart Oda</option>
-                                <option value="deluxe">Deluxe Oda</option>
-                                <option value="suite">Suite</option>
-                            </select>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        
-                        <div class="form-group guest-group">
-                            <div class="guest-input">
-                                <label for="adults">Yetişkin</label>
-                                <select id="adults" name="adults">
-                                    <option value="1">1</option>
-                                    <option value="2" selected>2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
-                            </div>
-                            <div class="guest-input">
-                                <label for="children">Çocuk</label>
-                                <select id="children" name="children">
-                                    <option value="0" selected>0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="fullName">Ad Soyad</label>
-                            <input type="text" id="fullName" name="fullName" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">E-posta</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Telefon</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="specialRequests">Özel İstekler (Opsiyonel)</label>
-                            <textarea id="specialRequests" name="specialRequests" rows="3"></textarea>
-                        </div>
-                        
-                        <div class="form-submit">
-                            <button type="submit" class="submit-btn">
-                                <span>Rezervasyon Yap</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                            <p class="form-note">Rezervasyonunuz onaylandıktan sonra e-posta ile bilgilendirileceksiniz.</p>
-                        </div>
-                    </form>
                 </div>
             </div>
             
-            <div class="reservation-decoration">
-                <div class="decor-circle decor-1"></div>
-                <div class="decor-circle decor-2"></div>
-                <div class="decor-pattern"></div>
-            </div>
+            <!-- Dekoratif Elementler -->
+            <div class="reservation-decor decor-1"></div>
+            <div class="reservation-decor decor-2"></div>
         </section>
 
        
