@@ -1872,24 +1872,37 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(inp
     }
 });
 
-// Galeri Filtreleme Fonksiyonu
+// Galeri Filtreleme Fonksiyonu (Güncellenmiş)
 function initializeGalleryFilter() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
     
+    // Varsayılan olarak sadece odaları göster
+    galleryItems.forEach(item => {
+        if (item.getAttribute('data-category') !== 'odalar') {
+            item.style.display = 'none';
+        }
+    });
+    
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Aktif butonu güncelle
+            const filter = button.getAttribute('data-filter');
+
+            // Tüm butonlardan 'active' sınıfını kaldır
             filterButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Tıklanan butona 'active' sınıfını ekle
             button.classList.add('active');
-            
-            const filterValue = button.getAttribute('data-filter');
-            
+
             // Galeri öğelerini filtrele
             galleryItems.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                if (item.getAttribute('data-category') === filter) {
                     item.style.display = 'block';
-                    item.style.animation = 'fadeIn 0.5s forwards';
+                    // Animasyon ekle
+                    gsap.fromTo(item, 
+                        { opacity: 0, y: 20 },
+                        { opacity: 1, y: 0, duration: 0.5 }
+                    );
                 } else {
                     item.style.display = 'none';
                 }
@@ -2252,4 +2265,65 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGalleryModal();
     initializeVideoControls();
     enhanceReservationForm();
+});
+
+// =============================================
+// Galeri için tam ekran görüntüleme fonksiyonu
+// =============================================
+document.querySelectorAll('.view-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const imgSrc = this.closest('.gallery-item').querySelector('img').src;
+        const modal = document.createElement('div');
+        modal.className = 'image-modal';
+        Object.assign(modal.style, {
+            position: 'fixed',
+            top: '0', left: '0',
+            width: '100%', height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.9)',
+            zIndex: '1000',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        });
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        Object.assign(img.style, {
+            maxWidth: '90%',
+            maxHeight: '90%',
+            objectFit: 'contain'
+        });
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        Object.assign(closeBtn.style, {
+            position: 'absolute',
+            top: '20px', right: '30px',
+            fontSize: '40px', color: 'white',
+            background: 'none', border: 'none',
+            cursor: 'pointer'
+        });
+        closeBtn.addEventListener('click', () => document.body.removeChild(modal));
+        modal.appendChild(img);
+        modal.appendChild(closeBtn);
+        modal.addEventListener('click', e => {
+            if (e.target === modal) document.body.removeChild(modal);
+        });
+        document.body.appendChild(modal);
+    });
+});
+
+// =============================================
+// Video tam ekran fonksiyonu
+// =============================================
+document.querySelectorAll('.fullscreen-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const video = this.closest('.video-wrapper').querySelector('video');
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+        }
+    });
 });

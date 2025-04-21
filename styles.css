@@ -1806,6 +1806,8 @@ html {
      ROOMS SECTION - YENİDEN TASARLANMIŞ
   ============================================= */
   .rooms {
+    background: url('image2/room-bg.jpg') center/cover no-repeat fixed;
+    background-color: #f8f5f0; /* Fallback */
     position: relative;
     padding: 4rem 0 1rem;
     background-color: var(--bg-color);
@@ -2259,6 +2261,7 @@ body.keyboard-navigation *:focus {
      FEATURES SECTION - GELİŞTİRİLMİŞ
   ============================================= */
   .features {
+    background: url('image2/front-view-people-working-reception.jpg') center/cover no-repeat fixed;
     position: relative;
     padding: 6rem 0;
     background-color: #f9f7f3;
@@ -2267,7 +2270,7 @@ body.keyboard-navigation *:focus {
   
   .features .section-title {
     font-size: 2.5rem;
-    color: #5d4e32;
+    color: white;
     margin-bottom: 1rem;
     text-align: center;
   }
@@ -2497,25 +2500,26 @@ body.keyboard-navigation *:focus {
      RESERVATION SECTION STYLES
   ============================================= */
   .reservation {
+    background: url('image2/travel.jpg') center/cover no-repeat fixed;
     position: relative;
     padding: 5rem 0;
-    background: linear-gradient(135deg, #f9f7f3 0%, #e8e5df 100%);
     overflow: hidden;
+
   }
   
+  
   .reservation-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 3rem;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
   }
   
   .reservation-info {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    order: 1;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
   }
   
   .reservation-highlights {
@@ -2608,12 +2612,12 @@ body.keyboard-navigation *:focus {
   }
   
   .reservation-form-container {
+    order: 2;
     background: white;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
+    padding: 2rem;
+    margin-top: 2rem;
   }
   
   .reservation-form-container::before {
@@ -2643,8 +2647,7 @@ body.keyboard-navigation *:focus {
   }
   
   .form-group {
-    margin-bottom: 1.5rem;
-    position: relative;
+    margin-bottom: 1rem;
   }
   
   .form-group label {
@@ -2690,7 +2693,34 @@ body.keyboard-navigation *:focus {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
+  .guest-group-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  /* Responsive ayarlar */
+@media (min-width: 150px) {
+  .reservation-wrapper {
+    flex-direction: row;
+    gap: 2rem;
+  }
   
+  .reservation-form-container {
+    flex: 1;
+    order: 2;
+    margin-top: 0;
+  }
+  
+  .reservation-info {
+    flex: 0 0 350px;
+    order: 1;
+  }
+}@media (max-width: 150px) {
+  .date-group,
+  .guest-group-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
   .date-input {
     position: relative;
   }
@@ -2848,11 +2878,9 @@ body.keyboard-navigation *:focus {
     .guest-group {
         grid-template-columns: 1fr;
     }
-    
-    .reservation {
-        padding: 3rem 0;
-    }
-    
+   
+  
+  
     .reservation-form-container {
         padding: 1.5rem;
     }
@@ -3139,12 +3167,6 @@ body.keyboard-navigation *:focus {
    Rezervasyon Bölümü Stilleri
    ================================================== */
 
-.reservation {
-    background: linear-gradient(135deg, #ffffffdd, #f8f8f8dd);
-    padding: 4rem 0;
-    position: relative;
-    overflow: hidden;
-}
 
 .reservation .section-title {
     color: var(--primary-color);

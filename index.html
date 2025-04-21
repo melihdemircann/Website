@@ -378,8 +378,15 @@
 
         <!-- Rooms Section with Micro-animations -->
         <section class="rooms texture-bg" id="odalar">
+            <div class="parallax-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="/videos/room-bg.mp4" type="video/mp4">
+                    Tarayıcınız video etiketini desteklemiyor.
+                </video>
+                <div class="water-effect"></div>
+            </div>
             <div class="container">
-                <h2 class="section-title" data-aos="fade-up">
+                <h2 class="section-title" data-aos="fade-up" style="color: white;">
                     <span class="title-decorator"></span>
                     Odalarımız
                     <span class="title-decorator"></span>
@@ -387,7 +394,7 @@
                 <div class="room-grid asymmetric-grid">
                     <article class="room-card glassmorphism" data-aos="fade-right" data-aos-delay="100" data-room-type="standart">
                         <div class="room-img">
-                             <img src="images\standart-oda.jpg" data-src="/images/standart/1.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
+                             <img src="image2/room/bedroom-1285156_1920.jpg" data-src="/images/standart/1.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
                              <div class="room-badge">En Çok Tercih Edilen</div>
                              <button class="view-gallery"><i class="fas fa-images"></i> Galeriyi Görüntüle</button>
                         </div>
@@ -418,7 +425,7 @@
                     </article>
                     <article class="room-card glassmorphism" data-aos="fade-up" data-aos-delay="200" data-room-type="deluxe">
                          <div class="room-img">
-                             <img src="images\deluxe-oda.jpg" data-src="/images/deluxe/1.jpg" alt="Deluxe Oda" loading="lazy" class="lazyload">
+                             <img src="image2/room/deluxe-oda.jpg" data-src="/images/deluxe/1.jpg" alt="Deluxe Oda" loading="lazy" class="lazyload">
                              <div class="room-badge">Deniz Manzaralı</div>
                              <button class="view-gallery"><i class="fas fa-images"></i> Galeriyi Görüntüle</button>
                          </div>
@@ -450,7 +457,7 @@
                      </article>
                     <article class="room-card glassmorphism" data-aos="fade-left" data-aos-delay="300" data-room-type="suite">
                          <div class="room-img">
-                             <img src="images\suite.jpg" data-src="/images/suite/1.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
+                             <img src="image2/room/bed-4416515_1920.jpg" data-src="/images/suite/1.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
                              <div class="room-badge">Lüks Deneyim</div>
                              <button class="view-gallery"><i class="fas fa-images"></i> Galeriyi Görüntüle</button>
                              <!-- 3D Tur Butonu (isteğe bağlı) -->
@@ -493,11 +500,11 @@
         <section class="features" id="hizmetler">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">
-                    <span class="title-decorator"></span>
+                    <span style="color: white;" class="title-decorator"></span>
                     Premium Hizmetlerimiz
                     <span class="title-decorator"></span>
                 </h2>
-                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                <p class="section-subtitle" style="color: white;" data-aos="fade-up" data-aos-delay="100">
                     Marsias Otel'de konforunuz için özenle tasarlanmış hizmetlerimizle sizi ağırlıyoruz.
                 </p>
                 
@@ -635,8 +642,8 @@
 
                 <!-- Galeri Filtreleme Butonları -->
                 <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
-                    <button class="filter-btn active" data-filter="all">Tümü</button>
-                    <button class="filter-btn" data-filter="odalar">Odalar</button>
+                    <!-- <button class="filter-btn active" data-filter="all">Tümü</button> -->
+                    <button class="filter-btn active" data-filter="odalar">Odalar</button>
                     <button class="filter-btn" data-filter="restoran">Restoran</button>
                     <button class="filter-btn" data-filter="spa">Spa</button>
                     <button class="filter-btn" data-filter="havuz">Havuz</button>
@@ -644,35 +651,216 @@
                 
                 <div class="gallery-grid" data-aos="fade-up" data-aos-delay="150">
                     <!-- Galeri Öğeleri -->
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/standart-oda.jpg" data-src="images/galeri6.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
+                        <div class="gallery-item odalar" data-category="odalar">
+                            <img src="image2/room/room1.jpg" data-src="images/galeri6.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Standart Odası</h3>
+                                <button class="view-btn" aria-label="Görüntüle">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="odalar">
+                            <img src="image2/room/room2.jpg" data-src="images/galeri6.jpg"  alt="Suite Oda"loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Suite Oda</h3>
+                                <button class="view-btn"><i class="fas fa-expand"></i></button>
+                            </div>
+                        </div>
+                        <div class="gallery-item odalar" data-category="odalar">
+                            <img src="image2/room/room3.jpg" data-src="images/galeri6.jpg" alt="Deluxe Oda" loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Deluxe Oda</h3>
+                                <button class="view-btn" aria-label="Görüntüle">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item odalar" data-category="odalar">
+                            <img src="image2/room/room4.jpg" data-src="images/galeri6.jpg" alt="Bahçe Manzaralı Oda" loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Bahçe Manzaralı Oda</h3>
+                                <button class="view-btn" aria-label="Görüntüle">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item odalar" data-category="odalar">
+                            <img src="image2/room/room5.jpg" data-src="images/galeri6.jpg" alt="Modern Oda" loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Modern Oda</h3>
+                                <button class="view-btn" aria-label="Görüntüle">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item odalar" data-category="odalar">
+                            <img src="image2/room/room6.jpg" data-src="images/galeri6.jpg" alt="Konforlu Oda" loading="lazy" class="lazyload">
+                            <div class="gallery-overlay">
+                                <h3>Konforlu Oda</h3>
+                                <button class="view-btn" aria-label="Görüntüle">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran1.jpg" data-src="images/galeri6.jpg" alt="Gurme Servis Deneyimi" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
-                            <h3>Standart Oda</h3>
+                            <h3>Gurme Servis Deneyimi</h3>
                             <button class="view-btn" aria-label="Görüntüle">
                                 <i class="fas fa-expand"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/deluxe-oda.jpg" data-src="images/galeri6.jpg" alt="Deluxe Oda" loading="lazy" class="lazyload">
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran2.jpg" data-src="images/galeri6.jpg" alt="Zarif Restoran Salonu" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
-                            <h3>Deluxe Oda</h3>
+                            <h3>Zarif Restoran Salonu</h3>
                             <button class="view-btn" aria-label="Görüntüle">
                                 <i class="fas fa-expand"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/suite.jpg" data-src="images/galeri6.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran3.jpg" data-src="images/galeri6.jpg" alt="Şarap ve Lezzet Tabağı" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
-                            <h3>Suite Oda</h3>
+                            <h3>Şarap ve Lezzet Tabağı</h3>
                             <button class="view-btn" aria-label="Görüntüle">
                                 <i class="fas fa-expand"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/galeri3.jpg" data-src="images/galeri6.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran4.jpg" data-src="images/galeri6.jpg" alt="Şefin Özel Sunumu" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Şefin Özel Sunumu</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran5.jpg" data-src="images/galeri6.jpg" alt="Romantik Akşam Yemekleri" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Romantik Akşam Yemekleri</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="restoran">
+                        <img src="image2/restaurant/restoran6.jpg" data-src="images/galeri6.jpg" alt="Sakin ve Şık Ortam" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Sakin ve Şık Ortam</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa1.jpg" data-src="images/galeri6.jpg" alt="Rahatlatıcı Spa Ortamı" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Rahatlatıcı Spa Ortamı</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa2.jpg" data-src="images/galeri6.jpg" alt="Lüks Kapalı Havuz Keyfi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Lüks Kapalı Havuz Keyfi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa3.jpg" data-src="images/galeri6.jpg" alt="Huzurlu Dinlenme Köşesi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Huzurlu Dinlenme Köşesi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa4.jpg" data-src="images/galeri6.jpg" alt="Özel Spa Duş Deneyimi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Özel Spa Duş Deneyimi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa5.jpg" data-src="images/galeri6.jpg" alt=" Terapiyle Gelen İçsel Denge" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3> Terapiyle Gelen İçsel Denge</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="spa">
+                        <img src="image2/spa/spa6.jpg" data-src="images/galeri6.jpg" alt="Zen Esintili Su Terapisi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Zen Esintili Su Terapisi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool1.jpg" data-src="images/galeri6.jpg" alt="Işıl Işıl Gece Havuzu" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Işıl Işıl Gece Havuzu</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool2.jpg" data-src="images/galeri6.jpg" alt="Huzurlu Havuz Başında Dinlenme" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Huzurlu Havuz Başında Dinlenme</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool3.jpg" data-src="images/galeri6.jpg" alt="Tropikal Açık Havuz Keyfi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Tropikal Açık Havuz Keyfi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool4.jpg" data-src="images/galeri6.jpg" alt="Ufka Açılan Sonsuzluk Havuzu" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Ufka Açılan Sonsuzluk Havuzu</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool5.jpg" data-src="images/galeri6.jpg" alt="Akşamın Serinliğinde Havuz Keyfi" loading="lazy" class="lazyload">
+                        <div class="gallery-overlay">
+                            <h3>Akşamın Serinliğinde Havuz Keyfi</h3>
+                            <button class="view-btn" aria-label="Görüntüle">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-item odalar" data-category="havuz">
+                        <img src="image2/pool/pool6.jpg" data-src="images/galeri6.jpg" alt="Modern ve Şık Havuz Alanı" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Havuz Keyfi</h3>
                             <button class="view-btn" aria-label="Görüntüle">
@@ -680,24 +868,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/galeri4.jpg" data-src="images/galeri6.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
-                        <div class="gallery-overlay">
-                            <h3>Rahatlama </h3>
-                            <button class="view-btn" aria-label="Görüntüle">
-                                <i class="fas fa-expand"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="images/galeri5.jpg" data-src="images/galeri6.jpg" alt="Suite Oda" loading="lazy" class="lazyload">
-                        <div class="gallery-overlay">
-                            <h3>Geniş Oda</h3>
-                            <button class="view-btn" aria-label="Görüntüle">
-                                <i class="fas fa-expand"></i>
-                            </button>
-                        </div>
-                    </div>
+
                     <!-- Diğer galeri öğeleri benzer şekilde eklenecek -->
                 </div>
             </div>
@@ -715,7 +886,7 @@
                 <div class="video-grid" data-aos="fade-up" data-aos-delay="100">
                     <div class="video-item">
                         <div class="video-wrapper">
-                            <video controls poster="images/pexels-thorsten-technoman-109353-338504.jpg">
+                            <video controls autoplay muted loop playsinline poster="images/pexels-thorsten-technoman-109353-338504.jpg">
                                 <source src="videos/video.mp4" type="video/mp4">
                                 Tarayıcınız video etiketini desteklemiyor.
                             </video>
@@ -726,7 +897,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-wrapper">
-                            <video controls poster="images/galeri4.jpg">
+                            <video controls autoplay muted loop playsinline poster="images/galeri4.jpg">
                                 <source src="videos/video1.mp4" type="video/mp4">
                                 Tarayıcınız video etiketini desteklemiyor.
                             </video>
@@ -737,7 +908,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-wrapper">
-                            <video controls poster="images/galeri5.jpg">
+                            <video controls autoplay muted loop playsinline poster="images/galeri5.jpg">
                                 <source src="videos/video2.mp4" type="video/mp4">
                                 Tarayıcınız video etiketini desteklemiyor.
                             </video>
