@@ -51,8 +51,281 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeContactForm();
     initializeReservationForm();
 });
+// Optimize edilmiş lazy loading fonksiyonu
+function optimizeLazyLoading() {
+    const lazyLoadInstances = [];
+    
+    // IntersectionObserver ile lazy loading
+    if ('IntersectionObserver' in window) {
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    
+                    // Veri kaynaklarını yükle
+                    if (lazyImage.dataset.src) {
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.removeAttribute('data-src');
+                    }
+                    if (lazyImage.dataset.srcset) {
+                        lazyImage.srcset = lazyImage.dataset.srcset;
+                        lazyImage.removeAttribute('data-srcset');
+                    }
+                    
+                    // Yükleme tamamlandığında
+                    lazyImage.onload = () => {
+                        lazyImage.classList.add('loaded');
+                        gsap.fromTo(lazyImage, 
+                            { opacity: 0 },
+                            { opacity: 1, duration: 0.5 }
+                        );
+                    };
+                    
+                    observer.unobserve(lazyImage);
+                    lazyLoadInstances.push(lazyImage);
+                }
+            });
+        }, {
+            rootMargin: '200px 0px', // Daha erken yüklemeye başla
+            threshold: 0.01
+        });
 
+        document.querySelectorAll('img[data-src], iframe[data-src]').forEach(el => {
+            lazyImageObserver.observe(el);
+        });
+    } else {
+        // Fallback için polyfill (lazysizes)
+        if (window.lazySizes) {
+            window.lazySizes.init();
+        }
+    }
+    
+    // Video lazy loading
+    const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const lazyVideo = entry.target;
+                if (lazyVideo.dataset.src) {
+                    lazyVideo.src = lazyVideo.dataset.src;
+                    lazyVideo.removeAttribute('data-src');
+                    
+                    // Video yüklendikten sonra posterı kaldır
+                    lazyVideo.onloadeddata = () => {
+                        lazyVideo.removeAttribute('poster');
+                        lazyVideo.classList.add('loaded');
+                    };
+                }
+                observer.unobserve(lazyVideo);
+            }
+        });
+    }, {
+        rootMargin: '300px 0px', // Videolar için daha geniş bir alan
+        threshold: 0.01
+    });
 
+    document.querySelectorAll('video[data-src]').forEach(el => {
+        lazyVideoObserver.observe(el);
+    });
+}
+// Optimize edilmiş galeri fonksiyonu
+function initializeOptimizedGallery() {
+    // Lightweight modal yapısı
+    const galleryModal = document.createElement('div');
+    galleryModal.className = 'gallery-modal';
+    galleryModal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" alt="" class="modal-image">
+            <div class="modal-caption"></div>
+            <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    `;
+    document.body.appendChild(galleryModal);
+    
+    // Galeri öğelerini hafiflet
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    const galleryData = galleryItems.map(item => ({
+        src: item.querySelector('img').dataset.src || item.querySelector('img').src,
+        alt: item.querySelector('img').alt,
+        title: item.querySelector('h3')?.textContent || ''
+    }));
+    
+    // Modal kontrol fonksiyonları
+    let currentIndex = 0;
+    let isAnimating = false;
+    
+    function showModal(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        currentIndex = index;
+        const item = galleryData[currentIndex];
+        
+        // Modal içeriğini güncelle
+        const modalImg = galleryModal.querySelector('.modal-image');
+        const modalCaption = galleryModal.querySelector('.modal-caption');
+        
+        // Önceki resmi temizle
+        modalImg.src = '';
+        modalImg.alt = '';
+        modalCaption.textContent = 'Yükleniyor...';
+        
+        // Yeni resmi yükle
+        const img = new Image();
+        img.onload = () => {
+            modalImg.src = item.src;
+            modalImg.alt = item.alt;
+            modalCaption.textContent = item.title;
+            
+            // Animasyon
+            galleryModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            gsap.fromTo(galleryModal.querySelector('.modal-content'), 
+                { opacity: 0, scale: 0.95 },
+                { 
+                    opacity: 1, 
+                    scale: 1, 
+                    duration: 0.3,
+                    onComplete: () => { isAnimating = false; }
+                }
+            );
+        };
+        img.src = item.src;
+    }
+    
+    function closeModal() {
+        isAnimating = true;
+        gsap.to(galleryModal.querySelector('.modal-content'), {
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.2,
+            onComplete: () => {
+                galleryModal.style.display = 'none';
+                document.body.style.overflow = '';
+                isAnimating = false;
+            }
+        });
+    }
+    
+    function navigate(direction) {
+        if (isAnimating) return;
+        
+        currentIndex = (currentIndex + direction + galleryData.length) % galleryData.length;
+        showModal(currentIndex);
+    }
+    
+    // Event listener'lar
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => showModal(index));
+    });
+    
+    galleryModal.querySelector('.close-modal').addEventListener('click', closeModal);
+    galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal) closeModal();
+    });
+    
+    galleryModal.querySelector('.prev-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigate(-1);
+    });
+    
+    galleryModal.querySelector('.next-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigate(1);
+    });
+    
+    // Klavye kontrolleri
+    document.addEventListener('keydown', (e) => {
+        if (galleryModal.style.display === 'flex') {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        }
+    });
+    
+    // IntersectionObserver ile galeri öğelerini optimize et
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target.querySelector('img');
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '200px'
+    });
+    
+    galleryItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+// Video optimizasyon fonksiyonu
+function optimizeVideos() {
+    const videoWrappers = document.querySelectorAll('.video-wrapper');
+    
+    videoWrappers.forEach(wrapper => {
+        const video = wrapper.querySelector('video');
+        if (!video) return;
+        
+        // Video kaynağını data-src'den yükle
+        if (video.dataset.src) {
+            video.src = video.dataset.src;
+            video.removeAttribute('data-src');
+        }
+        
+        // Poster optimizasyonu
+        if (video.poster) {
+            const posterImg = new Image();
+            posterImg.src = video.poster;
+            posterImg.onload = () => {
+                video.style.backgroundImage = `url(${video.poster})`;
+                video.style.backgroundSize = 'cover';
+                video.style.backgroundPosition = 'center';
+            };
+        }
+        
+        // Oynatma/duraklatma optimizasyonu
+        wrapper.addEventListener('click', () => {
+            if (video.paused) {
+                video.play().catch(e => console.log('Video play failed:', e));
+                wrapper.classList.add('playing');
+            } else {
+                video.pause();
+                wrapper.classList.remove('playing');
+            }
+        });
+        
+        // Hafifletilmiş yükleme
+        video.loading = 'lazy';
+        video.preload = 'metadata';
+        video.playsInline = true;
+        video.muted = true; // Otomatik oynatma için muteli
+        
+        // Görünür olduğunda yükle
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (video.readyState < 3) { // Yeterli veri yüklenmediyse
+                        video.load();
+                    }
+                    videoObserver.unobserve(video);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '300px'
+        });
+        
+        videoObserver.observe(video);
+    });
+}
 // Özel cursor işlevi
 function initializeCustomCursor() {
     const cursor = document.getElementById("cursor-dot");
