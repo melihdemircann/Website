@@ -2,73 +2,103 @@
    GENEL STILLER - İYİLEŞTİRİLMİŞ
 ============================================= */
 :root {
-    /* Ana Renkler - Kontrastı artırılmış */
-    --primary: #a58351;
-    --primary-dark: #8d683a;
-    --primary-light: #d4b483;
-    --secondary: #1a2a3a;
-    --text: #333;
-    --text-light: #777;
-    --white: #ffffff;
-    --black: #000000;
-    --light-bg: #f8f5f0;
-    --dark-bg: #121212;
-    --gold: #b38c28;
-    
-    /* Diğer değişkenler aynı kalabilir */
-    /* Gölgeler */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
-    --shadow-active: 0 5px 15px rgba(0, 0, 0, 0.2);
-    
-    /* Geçişler */
-    --transition-fast: 0.3s ease;
-    --transition-normal: 0.5s ease;
-    --transition-slow: 0.8s ease;
-    
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 20px;
-    --radius-full: 9999px;
-    
-    /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --glass-blur: 10px;
-    
-    /* Font boyutları aynı kalabilir */
-    --font-xs: 0.75rem;
-    --font-sm: 0.875rem;
-    --font-base: 1rem;
-    --font-md: 1.125rem;
-    --font-lg: 1.25rem;
-    --font-xl: 1.5rem;
-    --font-2xl: 2rem;
-    --font-3xl: 2.5rem;
-    --font-4xl: 3rem;
-    --font-5xl: 4rem;
-    
-    /* Z-index değerleri */
-    --z-backdrop: 10;
-    --z-modal: 20;
-    --z-dropdown: 30;
-    --z-header: 40;
-    --z-tooltip: 50;
-    
-    /* Boşluklar */
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-2xl: 3rem;
-    --space-3xl: 4rem;
+  /* Temel renkler - Sofistike ve kontrastlı palet */
+  --primary: #a58351;
+  --primary-dark: #8d683a;
+  --primary-light: #d4b483;
+  --secondary: #1a2a3a;
+  --accent-color: #4a6670;
+  --accent-light: #7b939d;
+  --accent-dark: #344852;
+
+  /* Nötr renkler */
+  --white: #ffffff;
+  --off-white: #f9f7f3;
+  --light-gray: #e8e5df;
+  --gray: #c0bcb4;
+  --dark-gray: #5f5d58;
+  --black: #000000;
+
+  /* Arkaplan ve metin renkleri */
+  --bg-color: var(--off-white);
+  --bg-color-rgb: 249, 247, 243;
+  --light-bg: #f8f5f0;
+  --dark-bg: #121212;
+  --card-bg: #ffffff;
+  --text: #333;
+  --text-color: #2a2926;
+  --text-light: #777;
+
+  /* Font aileleri */
+  --font-main: 'Montserrat', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-accent: 'Cormorant Garamond', serif;
+
+  /* Font boyutları */
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-md: 1.125rem;
+  --font-lg: 1.25rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 2rem;
+  --font-3xl: 2.5rem;
+  --font-4xl: 3rem;
+  --font-5xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Gölge efektleri */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-active: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+  /* Cam efekti (Glassmorphism) */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-blur: 10px;
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-border-color: rgba(255, 255, 255, 0.18);
+  --glass-dark-background: rgba(30, 30, 30, 0.8);
+
+  /* Geçişler */
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.5s ease;
+  --transition-slow: 0.8s ease;
+
+  /* Z-index katmanları */
+  --z-backdrop: 10;
+  --z-tooltip: 50;
+  --z-fixed: 100;
+  --z-modal: 1000;
+  --z-dropdown: 30;
+  --z-header: 40;
+  --z-above: 10;
+  --z-normal: 1;
+  --z-behind: -1;
+
+  /* Boşluklar */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Ekstra */
+  --gold: #b38c28;
 }
+
 
 /* Tema değişkenleri - Kontrastı artırılmış */
 body {
@@ -231,17 +261,7 @@ body {
     position: relative;
   }
   
-  .section-title {
-    font-size: var(--font-3xl);
-    text-align: center;
-    margin-bottom: var(--space-2xl);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--heading-color);
-  }
-  
+
   /* Başlık Dekoratörleri ve Efektler */
   .title-decorator {
     display: inline-block;
@@ -382,103 +402,29 @@ body {
     margin-bottom: 2rem;
   }
   
-  .col-1 { width: 8.33%; }
-  .col-2 { width: 16.66%; }
-  .col-3 { width: 25%; }
-  .col-4 { width: 33.33%; }
-  .col-5 { width: 41.66%; }
-  .col-6 { width: 50%; }
-  .col-7 { width: 58.33%; }
-  .col-8 { width: 66.66%; }
-  .col-9 { width: 75%; }
-  .col-10 { width: 83.33%; }
-  .col-11 { width: 91.66%; }
-  .col-12 { width: 100%; }
-  
-  /* Responsive Düzenlemeler */
-  @media (max-width: 992px) {
-    .col-md-1 { width: 8.33%; }
-    .col-md-2 { width: 16.66%; }
-    .col-md-3 { width: 25%; }
-    .col-md-4 { width: 33.33%; }
-    .col-md-5 { width: 41.66%; }
-    .col-md-6 { width: 50%; }
-    .col-md-7 { width: 58.33%; }
-    .col-md-8 { width: 66.66%; }
-    .col-md-9 { width: 75%; }
-    .col-md-10 { width: 83.33%; }
-    .col-md-11 { width: 91.66%; }
-    .col-md-12 { width: 100%; }
-    
-    h1 { font-size: calc(var(--font-4xl) * 0.9); }
-    h2 { font-size: calc(var(--font-3xl) * 0.9); }
-    h3 { font-size: calc(var(--font-2xl) * 0.9); }
-  }
-  
-  @media (max-width: 768px) {
-    .col-sm-1 { width: 8.33%; }
-    .col-sm-2 { width: 16.66%; }
-    .col-sm-3 { width: 25%; }
-    .col-sm-4 { width: 33.33%; }
-    .col-sm-5 { width: 41.66%; }
-    .col-sm-6 { width: 50%; }
-    .col-sm-7 { width: 58.33%; }
-    .col-sm-8 { width: 66.66%; }
-    .col-sm-9 { width: 75%; }
-    .col-sm-10 { width: 83.33%; }
-    .col-sm-11 { width: 91.66%; }
-    .col-sm-12 { width: 100%; }
-    
-    h1 { font-size: calc(var(--font-4xl) * 0.8); }
-    h2 { font-size: calc(var(--font-3xl) * 0.8); }
-    h3 { font-size: calc(var(--font-2xl) * 0.8); }
-    
-    .container {
-      padding: 0 var(--space-lg);
-    }
-    
-    section {
-      padding: var(--space-2xl) 0;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .col-xs-1 { width: 8.33%; }
-    .col-xs-2 { width: 16.66%; }
-    .col-xs-3 { width: 25%; }
-    .col-xs-4 { width: 33.33%; }
-    .col-xs-5 { width: 41.66%; }
-    .col-xs-6 { width: 50%; }
-    .col-xs-7 { width: 58.33%; }
-    .col-xs-8 { width: 66.66%; }
-    .col-xs-9 { width: 75%; }
-    .col-xs-10 { width: 83.33%; }
-    .col-xs-11 { width: 91.66%; }
-    .col-xs-12 { width: 100%; }
-    
-    h1 { font-size: calc(var(--font-3xl)); }
-    h2 { font-size: calc(var(--font-2xl)); }
-    h3 { font-size: calc(var(--font-xl)); }
-  }
-  
   /* Buton Stilleri */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
-    font-size: var(--font-base);
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    z-index: 1;
-  }
+ /* Buton Stilleri */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm); /* İki farklı değer vardı, daha küçük olan tercih edildi */
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: var(--font-base);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: none;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
   
   .btn-sm {
     padding: 0.5rem 1rem;
@@ -567,30 +513,7 @@ body {
   .btn:hover::after {
     transform: translateX(0);
   }
-  
-  /* Özel Buton Efektleri */
-  .btn-glow {
-    position: relative;
-  }
-  
-  .btn-glow::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: calc(var(--radius-sm) + 2px);
-    background: linear-gradient(45deg, var(--primary-color), transparent, var(--primary-color));
-    z-index: -1;
-    animation: glowing 1.5s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .btn-glow:hover::before {
-    opacity: 1;
-  }
+
   
   @keyframes glowing {
     0% { background-position: 0 0; }
@@ -738,34 +661,7 @@ body {
 /* =============================================
      THEME SWITCHER - Enhanced
 ============================================= */
-.theme-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 12px;
-    z-index: var(--z-dropdown);
-}
-  
-.theme-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    background-color: var(--glass-background);
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border-color);
-    box-shadow: var(--shadow-md);
-    position: relative;
-    overflow: hidden;
-}
+
 
 /* Theme button hover and active states */
 .theme-btn:hover {
@@ -961,15 +857,8 @@ header.scrolled .menu-toggle {
         width: 180px;
     }
     
-    .theme-switcher {
-        top: 15px;
-        right: 15px;
-    }
+   
     
-    .theme-btn {
-        width: 36px;
-        height: 36px;
-    }
 }
 
 /* Add smooth scrolling to the entire page */
@@ -1232,74 +1121,6 @@ html {
     cursor: not-allowed;
 }
 
-/* Breadcrumb */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-size: var(--font-sm);
-    margin-bottom: var(--space-lg);
-}
-
-.breadcrumb-item {
-    color: var(--text-light);
-}
-
-.breadcrumb-separator {
-    color: var(--text-light);
-}
-
-.breadcrumb-item.active {
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-/* Progress Bar */
-.progress {
-    height: 6px;
-    background-color: var(--light-bg);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    margin-bottom: var(--space-md);
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: var(--primary-color);
-    border-radius: var(--radius-full);
-    width: 0;
-    transition: width var(--transition-normal);
-}
-
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
-    font-size: var(--font-sm);
-}
-
-/* Modal */
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: var(--z-backdrop);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-normal), visibility var(--transition-normal);
-}
-
-.modal-backdrop.active {
-    opacity: 1;
-    visibility: visible;
-}
-
 .modal {
     background-color: var(--card-bg);
     border-radius: var(--radius-md);
@@ -1355,15 +1176,6 @@ html {
     gap: var(--space-sm);
 }
 
-/* Spin Animation */
-.spin {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 /* Fade In Animation */
 .fade-in {
@@ -1390,38 +1202,6 @@ html {
         transform: translateY(0);
     }
 }
-
-/* Slide In Animation */
-.slide-in-left {
-    animation: slideInLeft var(--transition-normal) forwards;
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.slide-in-right {
-    animation: slideInRight var(--transition-normal) forwards;
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 /* Utilities */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
@@ -1506,10 +1286,6 @@ html {
 @media print {
     header,
     footer,
-    .theme-switcher,
-    .no-print {
-        display: none !important;
-    }
     
     body {
         background-color: white !important;
@@ -1536,70 +1312,7 @@ html {
  /* =============================================
    GENEL DEĞIŞKENLER VE BASE STILLER
 ============================================= */
-:root {
-    /* Ana renkler - Daha sofistike palet */
-    --primary-color: #7c6a46;
-    --primary-light: #a69678;
-    --primary-dark: #5d4e32;
-    --accent-color: #4a6670;
-    --accent-light: #7b939d;
-    --accent-dark: #344852;
-  
-    /* Nötr renkler */
-    --white: #ffffff;
-    --off-white: #f9f7f3;
-    --light-gray: #e8e5df;
-    --gray: #c0bcb4;
-    --dark-gray: #5f5d58;
-    --black: #2a2926;
-  
-    /* Arkaplan renkleri */
-    --bg-color: var(--off-white);
-    --bg-color-rgb: 249, 247, 243;
-    --card-bg: #ffffff;
-    --text-color: #2a2926;
-    --text-light: #5f5d58;
-  
-    /* Font boyutları - Daha tutarlı skala */
-    --font-xs: 0.75rem;   /* 12px */
-    --font-sm: 0.875rem;  /* 14px */
-    --font-base: 1rem;    /* 16px */
-    --font-md: 1.125rem;  /* 18px */
-    --font-lg: 1.25rem;   /* 20px */
-    --font-xl: 1.5rem;    /* 24px */
-    --font-2xl: 2rem;     /* 32px */
-    --font-3xl: 2.5rem;   /* 40px */
-    --font-4xl: 3rem;     /* 48px */
-  
-    /* Font aileleri */
-    --font-main: 'Montserrat', sans-serif;
-    --font-heading: 'Playfair Display', serif;
-    --font-accent: 'Cormorant Garamond', serif;
-  
-    /* Gölgeler */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.15);
-  
-    /* Yuvarlak köşeler */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-  
-    /* Geçişler */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
-  
-    /* Z-index katmanları */
-    --z-behind: -1;
-    --z-normal: 1;
-    --z-above: 10;
-    --z-fixed: 100;
-    --z-modal: 1000;
-  }
+
   
   /* Base stiller */
   body {
@@ -1628,12 +1341,16 @@ html {
     margin: 0 auto;
     padding: 0 1rem;
   }
-  
   .section-title {
     font-family: var(--font-heading);
-    margin-bottom: 3rem;
+    font-size: var(--font-3xl);
+    color: var(--heading-color);
+    margin-bottom: var(--space-2xl);
     position: relative;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .section-title::after {
@@ -1647,21 +1364,7 @@ html {
     transform: translateX(-50%);
   }
   
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-family: var(--font-main);
-    font-weight: 500;
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: var(--shadow-sm);
-  }
+ 
   
   .btn-primary {
     background-color: var(--primary-color);
@@ -2871,38 +2574,7 @@ body.keyboard-navigation *:focus {
 /* =============================================
    GENEL İYİLEŞTİRMELER
   ============================================= */
-:root {
-    /* Temel renkler için HSL kullanımı (daha kolay manipülasyon) */
-    --primary-hsl: 33, 40%, 64%;
-    --primary-color: hsl(var(--primary-hsl));
-    --primary-dark: hsl(var(--primary-hsl), 0.85);
-    --primary-light: hsl(var(--primary-hsl), 0.15);
-    
-    /* Koyu tema için iyileştirilmiş değişkenler */
-    --dark-bg: #121212;
-    --light-bg: #f8f9fa;
-    
-    /* Cam efekti için geliştirilmiş değişkenler */
-    --glass-background: rgba(255, 255, 255, 0.1);
-    --glass-border-color: rgba(255, 255, 255, 0.18);
-    --glass-dark-background: rgba(30, 30, 30, 0.8);
-    
-    /* Gölgeler için geliştirilmiş değerler (daha modern görünüm) */
-    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
-    
-    /* Z-indeks katmanları */
-    --z-tooltip: 10;
-    --z-fixed: 100;
-    --z-modal: 1000;
-    
-    /* Geçiş süreleri */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
-  }
-  
+
   /* Kaydırma davranışını iyileştirme */
   html {
     scroll-behavior: smooth;
@@ -3314,9 +2986,13 @@ body.keyboard-navigation *:focus {
     border-radius: var(--radius-md);
     overflow: hidden;
     aspect-ratio: 4/3;
-    transition: transform var(--transition-fast);
+    display: block; /* Default display */
+    transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateZ(0); /* GPU hızlandırma */
     backface-visibility: hidden; /* Performans iyileştirme */
+}
+.gallery-item[style*="display: none"] {
+  opacity: 0; /* Ensure hidden items have no opacity */
 }
 
 .gallery-item img {

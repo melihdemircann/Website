@@ -6,21 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Marsias Otel & Spa - Konfor ve lüksün buluştuğu adres. Aydın'da unutulmaz bir tatil deneyimi.">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
     <title>Marsias Otel & Spa | Aydın</title>
 <!-- Kritik CSS -->
 <style>
-    /* Above-the-fold kritik stiller */
-    .hero, .navbar, .preloader {
-        opacity: 1 !important; /* JavaScript yüklenene kadar görünür olmalı */
+    /* Sadece ilk görünen alan için gerekli stiller */
+    .preloader, header, .hero {
+        opacity: 1 !important;
     }
-    body { font-family: 'Montserrat', sans-serif; }
-    .preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f8f5f0; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-    .preloader-content { text-align: center; }
+    body {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-bg);
+        margin: 0;
+        overflow-x: hidden;
+        min-height: 100%;
+    }
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f5f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    .loading-bar {
+        width: 220px;
+        height: 5px;
+        background-color: rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .loading-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        background-color: #a58351;
+    }
     .logo-animation { font-family: 'Alex Brush', cursive; font-size: 2.8rem; color: #a58351; margin-bottom: 1.2rem; }
-    .loading-bar { width: 220px; height: 5px; background-color: rgba(0, 0, 0, 0.08); border-radius: 6px; overflow: hidden; position: relative; }
-    .loading-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0; background-color: #a58351; }
-    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem 0; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-    .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .preloader-content { text-align: center; }
     .logo a { font-family: 'Alex Brush', cursive; font-size: 2.5rem; color: #a58351; text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-link { font-size: 1rem; font-weight: 500; color: #1a2a3a; text-decoration: none; position: relative; padding: 0.5rem 0; }
@@ -244,7 +276,7 @@ transition: background-color 0.3s;
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@600&family=Alex+Brush&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <!-- Favicon -->
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -284,6 +316,10 @@ transition: background-color 0.3s;
     ]
 }
 </script>
+
+<!-- Sayfada kullanılacak önemli kaynakları ön yükle -->
+<link rel="preload" href="/videos/room-bg.mp4" as="video" type="video/mp4">
+<link rel="preload" href="image2/hero-background.jpg" as="image">
 
 </head>
 
@@ -364,9 +400,8 @@ transition: background-color 0.3s;
     <!-- Rooms Section with Micro-animations -->
     <section class="rooms texture-bg" id="odalar">
         <div class="parallax-bg">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline preload="none" poster="/images/video-poster.jpg">
                 <source src="/videos/room-bg.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor.
             </video>
             <div class="water-effect"></div>
         </div>
@@ -379,7 +414,13 @@ transition: background-color 0.3s;
             <div class="room-grid asymmetric-grid">
                 <article class="room-card glassmorphism" data-aos="fade-right" data-aos-delay="100" data-room-type="standart">
                     <div class="room-img">
-                         <img src="image2/room/bedroom-1285156_1920.jpg" data-src="/images/standart/1.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
+                         <img src="image2/room/room1.jpg" 
+                              data-src="images/standart/1.jpg" 
+                              loading="lazy" 
+                              width="400" 
+                              height="300"
+                              alt="Standart Oda" 
+                              class="lazyload">
                          <div class="room-badge">En Çok Tercih Edilen</div>
                          <button class="view-gallery"><i class="fas fa-images"></i> Galeriyi Görüntüle</button>
                     </div>
@@ -634,8 +675,14 @@ transition: background-color 0.3s;
             
             <div class="gallery-grid" data-aos="fade-up" data-aos-delay="150">
                 <!-- Galeri Öğeleri -->
-                    <div class="gallery-item odalar" data-category="odalar">
-                        <img src="image2/room/room1.jpg" data-src="images/galeri6.jpg" alt="Standart Oda" loading="lazy" class="lazyload">
+                    <div class="gallery-item" data-category="odalar">
+                        <img src="image2/room/room1.jpg" 
+                             data-src="images/standart/1.jpg" 
+                             loading="lazy" 
+                             width="400" 
+                             height="300"
+                             alt="Standart Oda" 
+                             class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Standart Odası</h3>
                             <button class="view-btn" aria-label="Görüntüle">
@@ -650,7 +697,7 @@ transition: background-color 0.3s;
                             <button class="view-btn"><i class="fas fa-expand"></i></button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
+                    <div class="gallery-item" data-category="odalar">
                         <img src="image2/room/room3.jpg" data-src="images/galeri6.jpg" alt="Deluxe Oda" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Deluxe Oda</h3>
@@ -659,7 +706,7 @@ transition: background-color 0.3s;
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
+                    <div class="gallery-item" data-category="odalar">
                         <img src="image2/room/room4.jpg" data-src="images/galeri6.jpg" alt="Bahçe Manzaralı Oda" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Bahçe Manzaralı Oda</h3>
@@ -668,7 +715,7 @@ transition: background-color 0.3s;
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
+                    <div class="gallery-item" data-category="odalar">
                         <img src="image2/room/room5.jpg" data-src="images/galeri6.jpg" alt="Modern Oda" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Modern Oda</h3>
@@ -677,7 +724,7 @@ transition: background-color 0.3s;
                             </button>
                         </div>
                     </div>
-                    <div class="gallery-item odalar" data-category="odalar">
+                    <div class="gallery-item" data-category="odalar">
                         <img src="image2/room/room6.jpg" data-src="images/galeri6.jpg" alt="Konforlu Oda" loading="lazy" class="lazyload">
                         <div class="gallery-overlay">
                             <h3>Konforlu Oda</h3>
@@ -686,7 +733,7 @@ transition: background-color 0.3s;
                             </button>
                         </div>
                     </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran1.jpg" data-src="images/galeri6.jpg" alt="Gurme Servis Deneyimi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Gurme Servis Deneyimi</h3>
@@ -695,7 +742,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran2.jpg" data-src="images/galeri6.jpg" alt="Zarif Restoran Salonu" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Zarif Restoran Salonu</h3>
@@ -704,7 +751,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran3.jpg" data-src="images/galeri6.jpg" alt="Şarap ve Lezzet Tabağı" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Şarap ve Lezzet Tabağı</h3>
@@ -713,7 +760,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran4.jpg" data-src="images/galeri6.jpg" alt="Şefin Özel Sunumu" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Şefin Özel Sunumu</h3>
@@ -722,7 +769,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran5.jpg" data-src="images/galeri6.jpg" alt="Romantik Akşam Yemekleri" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Romantik Akşam Yemekleri</h3>
@@ -731,7 +778,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="restoran">
+                <div class="gallery-item" data-category="restoran">
                     <img src="image2/restaurant/restoran6.jpg" data-src="images/galeri6.jpg" alt="Sakin ve Şık Ortam" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Sakin ve Şık Ortam</h3>
@@ -740,7 +787,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item" data-category="spa">
                     <img src="image2/spa/spa1.jpg" data-src="images/galeri6.jpg" alt="Rahatlatıcı Spa Ortamı" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Rahatlatıcı Spa Ortamı</h3>
@@ -749,7 +796,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item" data-category="spa">
                     <img src="image2/spa/spa2.jpg" data-src="images/galeri6.jpg" alt="Lüks Kapalı Havuz Keyfi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Lüks Kapalı Havuz Keyfi</h3>
@@ -758,7 +805,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item" data-category="spa">
                     <img src="image2/spa/spa3.jpg" data-src="images/galeri6.jpg" alt="Huzurlu Dinlenme Köşesi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Huzurlu Dinlenme Köşesi</h3>
@@ -767,7 +814,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item" data-category="spa">
                     <img src="image2/spa/spa4.jpg" data-src="images/galeri6.jpg" alt="Özel Spa Duş Deneyimi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Özel Spa Duş Deneyimi</h3>
@@ -776,7 +823,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item " data-category="spa">
                     <img src="image2/spa/spa5.jpg" data-src="images/galeri6.jpg" alt=" Terapiyle Gelen İçsel Denge" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3> Terapiyle Gelen İçsel Denge</h3>
@@ -785,7 +832,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="spa">
+                <div class="gallery-item" data-category="spa">
                     <img src="image2/spa/spa6.jpg" data-src="images/galeri6.jpg" alt="Zen Esintili Su Terapisi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Zen Esintili Su Terapisi</h3>
@@ -795,7 +842,7 @@ transition: background-color 0.3s;
                     </div>
                 </div>
 
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool1.jpg" data-src="images/galeri6.jpg" alt="Işıl Işıl Gece Havuzu" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Işıl Işıl Gece Havuzu</h3>
@@ -804,7 +851,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool2.jpg" data-src="images/galeri6.jpg" alt="Huzurlu Havuz Başında Dinlenme" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Huzurlu Havuz Başında Dinlenme</h3>
@@ -813,7 +860,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool3.jpg" data-src="images/galeri6.jpg" alt="Tropikal Açık Havuz Keyfi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Tropikal Açık Havuz Keyfi</h3>
@@ -822,7 +869,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool4.jpg" data-src="images/galeri6.jpg" alt="Ufka Açılan Sonsuzluk Havuzu" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Ufka Açılan Sonsuzluk Havuzu</h3>
@@ -831,7 +878,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool5.jpg" data-src="images/galeri6.jpg" alt="Akşamın Serinliğinde Havuz Keyfi" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Akşamın Serinliğinde Havuz Keyfi</h3>
@@ -840,7 +887,7 @@ transition: background-color 0.3s;
                         </button>
                     </div>
                 </div>
-                <div class="gallery-item odalar" data-category="havuz">
+                <div class="gallery-item" data-category="havuz">
                     <img src="image2/pool/pool6.jpg" data-src="images/galeri6.jpg" alt="Modern ve Şık Havuz Alanı" loading="lazy" class="lazyload">
                     <div class="gallery-overlay">
                         <h3>Havuz Keyfi</h3>
@@ -1271,13 +1318,13 @@ transition: background-color 0.3s;
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
 <!-- LazySizes (Lazy loading için) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNU7YYDzQd4rF3rqDcNIcVag==" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
 <script src="./mail.js"></script>
-<script src="./script.js"></script>
+<script src="./script.js" defer></script>
 
 </body>
 
